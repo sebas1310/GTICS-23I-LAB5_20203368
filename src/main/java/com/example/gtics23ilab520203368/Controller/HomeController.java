@@ -23,4 +23,9 @@ public class HomeController {
         model.addAttribute("listemp", employeeRepository.findAll());
         return "listempleados";
     }
+    @GetMapping(value = "/nuevoempleado")
+    public String nuevo(){
+
+        return"nuevoempleado";
+    }
 }

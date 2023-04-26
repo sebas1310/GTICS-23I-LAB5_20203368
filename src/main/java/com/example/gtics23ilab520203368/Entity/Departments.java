@@ -1,9 +1,12 @@
 package com.example.gtics23ilab520203368.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
-
+@Getter
+@Setter
 @Entity
 public class Departments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,52 +19,8 @@ public class Departments {
     @Basic
     @Column(name = "manager_id")
     private Integer managerId;
-    @Basic
-    @Column(name = "location_id")
-    private Integer locationId;
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Locations locations;
 
-    public int getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-    public Integer getManagerId() {
-        return managerId;
-    }
-
-    public void setManagerId(Integer managerId) {
-        this.managerId = managerId;
-    }
-
-    public Integer getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(Integer locationId) {
-        this.locationId = locationId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Departments that = (Departments) o;
-        return departmentId == that.departmentId && Objects.equals(departmentName, that.departmentName) && Objects.equals(managerId, that.managerId) && Objects.equals(locationId, that.locationId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(departmentId, departmentName, managerId, locationId);
-    }
 }

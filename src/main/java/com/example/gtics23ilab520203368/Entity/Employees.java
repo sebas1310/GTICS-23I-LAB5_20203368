@@ -48,10 +48,9 @@ public class Employees {
     @Column(name = "manager_id")
     private Integer managerId;
 
-    @OneToMany
-    @Column(name = "department_id")
+    @ManyToOne
+    @JoinColumn(name = "department_id")
     private Departments departments;
-
     @Basic
     @Column(name = "enabled")
     private Integer enabled;

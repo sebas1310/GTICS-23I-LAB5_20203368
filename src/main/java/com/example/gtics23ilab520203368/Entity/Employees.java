@@ -1,0 +1,57 @@
+package com.example.gtics23ilab520203368.Entity;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Objects;
+
+@Getter
+@Setter
+@Entity
+public class Employees {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "employee_id")
+    private int employeeId;
+    @Basic
+    @Column(name = "first_name")
+    private String firstName;
+    @Basic
+    @Column(name = "last_name")
+    private String lastName;
+    @Basic
+    @Column(name = "email")
+    private String email;
+    @Basic
+    @Column(name = "password")
+    private String password;
+    @Basic
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Basic
+    @Column(name = "hire_date")
+    private Timestamp hireDate;
+
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Jobs jobs;
+    @Basic
+    @Column(name = "salary")
+    private BigDecimal salary;
+    @Basic
+    @Column(name = "commission_pct")
+    private BigDecimal commissionPct;
+    @Basic
+    @Column(name = "manager_id")
+    private Integer managerId;
+    @Basic
+    @Column(name = "department_id")
+    private Integer departmentId;
+    @Basic
+    @Column(name = "enabled")
+    private Integer enabled;
+
+}

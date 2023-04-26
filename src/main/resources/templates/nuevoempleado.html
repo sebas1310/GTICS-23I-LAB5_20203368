@@ -50,10 +50,10 @@
                 <input  name="contrasena" type="text" class="form-control" id="contrasena"/>
             </div>
 
-            <div class="mb-3">
-                <label for="puesto" class="form-label">Puesto</label>
-                <input  name="puesto" type="text" class="form-control" id="puesto"/>
-            </div>
+            <select class="form-select" aria-label="Default select example" placeholder="Puesto">
+                <option selected>Seleccion un puesto</option>
+                <option th:each="p:${puestos}" th:value="${p.jobId}" th:text="${p.jobTitle}"></option>
+            </select>
 
             <div class="mb-3">
                 <label for="sueldo" class="form-label">Sueldo</label>
@@ -67,7 +67,7 @@
 
             <div class="mb-3">
                 <label for="departamento" class="form-label">Departamento</label>
-                <input name="departamento" type="text" class="form-control" id="departamento" readonly/>
+                <input name="departamento" type="text" class="form-control" id="departamento"/>
             </div>
 
 

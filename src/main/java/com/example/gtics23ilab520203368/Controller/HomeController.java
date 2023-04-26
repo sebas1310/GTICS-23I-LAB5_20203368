@@ -1,6 +1,7 @@
 package com.example.gtics23ilab520203368.Controller;
 
 import com.example.gtics23ilab520203368.Repository.EmployeeRepository;
+import com.example.gtics23ilab520203368.Repository.JobRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
     final EmployeeRepository employeeRepository;
+    final JobRepository jobRepository;
 
-    public HomeController(EmployeeRepository employeeRepository) {
+    public HomeController(EmployeeRepository employeeRepository, JobRepository jobRepository) {
         this.employeeRepository = employeeRepository;
+        this.jobRepository = jobRepository;
     }
 
     @GetMapping(value = "/home")
@@ -24,8 +27,8 @@ public class HomeController {
         return "listempleados";
     }
     @GetMapping(value = "/nuevoempleado")
-    public String nuevo(){
-
+    public String nuevo(Model model){
+        model.addAttribute("puestos",jobRepository.findAll());
         return"nuevoempleado";
     }
 }

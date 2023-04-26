@@ -47,9 +47,11 @@ public class Employees {
     @Basic
     @Column(name = "manager_id")
     private Integer managerId;
-    @Basic
+
+    @OneToMany
     @Column(name = "department_id")
-    private Integer departmentId;
+    private Departments departments;
+
     @Basic
     @Column(name = "enabled")
     private Integer enabled;

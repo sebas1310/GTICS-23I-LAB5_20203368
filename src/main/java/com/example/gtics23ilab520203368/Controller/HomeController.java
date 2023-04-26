@@ -1,16 +1,26 @@
 package com.example.gtics23ilab520203368.Controller;
 
-import lombok.Getter;
+import com.example.gtics23ilab520203368.Repository.EmployeeRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(value = "/home")
 public class HomeController {
-    @GetMapping(value = "")
+    final EmployeeRepository employeeRepository;
+
+    public HomeController(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    @GetMapping(value = "/home")
     public String home(){
         return "recursoshumanos";
+    }
+
+    @GetMapping(value = "/empleados")
+    public String employees(Model model){
+        model.addAttribute("listemp", employeeRepository.findAll());
+        return "listempleados";
     }
 }

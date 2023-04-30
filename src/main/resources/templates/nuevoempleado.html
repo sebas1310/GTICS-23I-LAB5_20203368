@@ -29,7 +29,6 @@
     <div class="container px-4 py-5">
         <h1 class="pb-2 mb-4 border-bottom">Nuevo Ingreso</h1>
         <form method="post" th:action="@{'/guardar'}" class="col-4">
-
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input name="nombre" type="text" class="form-control" id="nombre"/>
@@ -50,10 +49,13 @@
                 <input  name="contrasena" type="text" class="form-control" id="contrasena"/>
             </div>
 
-            <select class="form-select" aria-label="Default select example" placeholder="Puesto">
-                <option selected>Seleccion un puesto</option>
+            <div class="mb-3">
+            <label for="Puesto" class="form-label"></label>
+            <select class="form-select" aria-label="Default select example"  id="puesto" name="puesto">
+                <option selected disabled>Seleccione un puesto</option>
                 <option th:each="p:${puestos}" th:value="${p.jobId}" th:text="${p.jobTitle}"></option>
             </select>
+            </div>
 
             <div class="mb-3">
                 <label for="sueldo" class="form-label">Sueldo</label>
@@ -61,14 +63,21 @@
             </div>
 
             <div class="mb-3">
-                <label for="jefe" class="form-label">Jefe</label>
-                <input name="jefe" type="text" class="form-control" id="jefe"/>
+                <label for="jefe" class="form-label">JEFE</label>
+                <select class="form-select" aria-label="Default select example" id="jefe" name="jefe">
+                    <option selected disabled>Seleccione un Jefe</option>
+                    <option th:each="b:${bosses}" th:value="${b.employeeId}" th:text="|${b.firstName} ${b.lastName}|"></option>
+                </select>
             </div>
 
             <div class="mb-3">
                 <label for="departamento" class="form-label">Departamento</label>
-                <input name="departamento" type="text" class="form-control" id="departamento"/>
+                <select class="form-select" aria-label="Default select example" id="departamento" name="departamento">
+                    <option selected disabled>Seleccione un Departamento</option>
+                    <option th:each="d:${department}" th:value="${d.departmentId}" th:text="${d.departmentName}"></option>
+                </select>
             </div>
+
 
 
             <a th:href="@{'/empleados'}" class="btn btn-danger">Cancelar</a>

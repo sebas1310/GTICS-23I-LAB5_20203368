@@ -28,12 +28,17 @@
 <a class="btn btn-primary" th:href="@{'/nuevoempleado'}" role="button">Nuevo Empleado</a>
 <div class="container">
   <br>
-  <div class="input-group">
-    <input type="search" class="form-control rounded" placeholder="Texto a buscar" aria-label="Search" aria-describedby="search-addon" />
-    <button type="button" class="btn btn-outline-primary">Buscar</button>
-    <button type="button" class="btn btn-outline-danger">Limpiar</button>
-  </div>
   <table class="table table-sm">
+    <div th:if="${msj!=null}" th:text="${msj}" class="alert alert-success" role="alert"></div>
+    <form method="post" th:action="@{'/buscar'}">
+      <div class="input-group mb-3">
+        <input type="search" class="form-control rounded" placeholder="Texto a buscar" aria-label="Search" aria-describedby="search-addon" name="texto"/>
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-outline-primary">Buscar</button>
+          <a type="button" class="btn btn-outline-danger" th:href="@{'/empleados'}">Limpiar</a>
+        </div>
+      </div>
+    </form>
     <tr>
       <th>#</th>
       <th>Nombre</th>
@@ -53,7 +58,7 @@
       <td th:text="${p.departments.departmentName}"></td>
       <td th:text="${p.departments.locations.getCity()}"></td>
       <td><button type="button" class="btn btn-primary">Editar</button></td>
-      <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+      <td><a type="button" class="btn btn-danger" th:href="@{'/deleteEmploye?id='+${p.employeeId}}">Eliminar</a></td>
     </tr>
   </table>
 </div>

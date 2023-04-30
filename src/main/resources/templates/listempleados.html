@@ -46,8 +46,7 @@
       <th>Puesto</th>
       <th>Departamento</th>
       <th>Ciudad</th>
-      <th>Editar</th>
-      <th>Borrar</th>
+      <th></th>
       <th></th>
     </tr>
     <tr th:each="p,idx:${listemp}">
@@ -58,7 +57,7 @@
       <td th:text="${p.departments.departmentName}"></td>
       <td th:text="${p.departments.locations.getCity()}"></td>
       <td><button type="button" class="btn btn-primary">Editar</button></td>
-      <td><a type="button" class="btn btn-danger" th:href="@{'/deleteEmploye?id='+${p.employeeId}}">Eliminar</a></td>
+      <td><a type="button" class="btn btn-danger" th:href="@{'/deleteEmploye?id='+${p.employeeId}}">Borrar</a></td>
     </tr>
   </table>
 </div>

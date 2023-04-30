@@ -31,7 +31,7 @@ public interface EmployeeRepository extends JpaRepository<Employees,Integer> {
     List<Employees> showBoss();
 
     @Modifying
-    @Query(nativeQuery = true, value = "INSERT INTO employees(first_name, last_name, email, password, hire_date, job_id, salary, manager_id, department_id, enabled) values (?1,?2,?3,?4,NOW(),?5,?6,?7,?8,1)")
+    @Query(nativeQuery = true, value = "INSERT INTO employees(first_name, last_name, email, password, hire_date, job_id, salary, manager_id, department_id, enabled) values (?1,?2,?3,SHA2(?4,256),NOW(),?5,?6,?7,?8,1)")
     void newEmployee(String name, String last_name, String email, String password, String jobid, BigDecimal salary, Integer manid, Integer department_id);
 
     @Query(nativeQuery = true, value = "SELECT jt.job_title AS puesto, \n" +

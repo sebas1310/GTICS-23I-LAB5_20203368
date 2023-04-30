@@ -4,6 +4,7 @@ import com.example.gtics23ilab520203368.Repository.DepartmentRepository;
 import com.example.gtics23ilab520203368.Repository.EmployeeRepository;
 import com.example.gtics23ilab520203368.Repository.JobRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,8 @@ public class HomeController {
     final EmployeeRepository employeeRepository;
     final JobRepository jobRepository;
     final DepartmentRepository departmentRepository;
+
+
 
     public HomeController(EmployeeRepository employeeRepository, JobRepository jobRepository, DepartmentRepository departmentRepository) {
         this.employeeRepository = employeeRepository;
@@ -74,5 +77,21 @@ public class HomeController {
         employeeRepository.newEmployee(nombre,apellido,email,contrasena,puesto,sueldo,jefeid,departamento);
         redirectAttributes.addFlashAttribute("msj", "Empleado creado exitosamente");
         return"redirect:/empleados";
+    }
+
+    @GetMapping(value = "/reportes")
+    public String  reportes(){
+        return "reportes";
+    }
+
+    @GetMapping(value = "/reportesSalario")
+    public String reportesSueldos(Model model){
+        model.addAttribute("list", employeeRepository.getSalarioJob());
+        return "reportesueldos";
+    }
+
+    @GetMapping(value = "/aumentoSalario")
+    public String  tentativaAumento(){
+        return "aumento";
     }
 }

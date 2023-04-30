@@ -1,6 +1,7 @@
 package com.example.gtics23ilab520203368.Repository;
 
 import com.example.gtics23ilab520203368.Entity.Employees;
+import com.example.gtics23ilab520203368.dto.SalarioPuestoDto;
 import jakarta.servlet.annotation.WebFilter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -32,4 +33,14 @@ public interface EmployeeRepository extends JpaRepository<Employees,Integer> {
     @Modifying
     @Query(nativeQuery = true, value = "INSERT INTO employees(first_name, last_name, email, password, hire_date, job_id, salary, manager_id, department_id, enabled) values (?1,?2,?3,?4,NOW(),?5,?6,?7,?8,1)")
     void newEmployee(String name, String last_name, String email, String password, String jobid, BigDecimal salary, Integer manid, Integer department_id);
+
+    @Query(nativeQuery = true, value = "SELECT jt.job_title AS puesto, \n" +
+            "       ROUND(jt.max_salary, 2) AS salariomaximo, \n" +
+            "       ROUND(jt.min_salary, 2) AS salariominimo, \n" +
+            "       ROUND(SUM(e.salary), 2) AS salariototal, \n" +
+            "       ROUND(AVG(e.salary), 2) AS salariopromedio \n" +
+            "FROM employees e \n" +
+            "INNER JOIN jobs jt ON e.job_id = jt.job_id \n" +
+            "GROUP BY jt.job_title ")
+    List<SalarioPuestoDto> getSalarioJob();
 }
